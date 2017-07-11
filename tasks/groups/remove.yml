@@ -1,0 +1,6 @@
+---
+  - name: "Remove group {{ item.name }}"
+    group:
+      name: "{{ item.name }}"
+      gid: "{{ item.gid }}"
+      state: absent

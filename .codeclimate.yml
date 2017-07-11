@@ -1,0 +1,32 @@
+---
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+        - python
+        - shell
+    exclude_paths:
+      # duplicate structures in testinfra files
+      - tests/*.py
+  fixme:
+    enabled: true
+  markdownlint:
+    enabled: true
+    exclude_paths:
+      - .github/*.md
+  pep8:
+    enabled: true
+  radon:
+    enabled: true
+    exclude_paths:
+      - tests/*.py
+  shellcheck:
+    enabled: true
+
+ratings:
+  paths:
+    - "**.py"
+    - "**.md"
+    - "**.yml"
+    - "**.sh"

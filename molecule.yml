@@ -1,0 +1,65 @@
+---
+ansible:
+  playbook: tests/test.yml
+  group_vars:
+    all:
+      accounts_groups:
+        - name: monkeys
+          gid: 2000
+      accounts_users:
+        - name: tmonkey1
+          comment: 'Test Monkey 1'
+          uid: 1006
+          password:
+            OpenBSD: "$2b$08$3eBhGgrLIXZP8Ewh8tqXtuh38M463K2rKYJSyUgATRKQNX70b2jyG"
+            FreeBSD: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
+            RedHat: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
+          groups:
+            - wheel
+          authorized_keys:
+            - key: 'ssh-dss FAKEKEYSUTFF== tmonkey1'
+              state: present
+        - name: tmonkey2
+          comment: 'Test Monkey 2'
+          uid: 1007
+          password:
+            OpenBSD: "$2b$08$3eBhGgrLIXZP8Ewh8tqXtuh38M463K2rKYJSyUgATRKQNX70b2jyG"
+            FreeBSD: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
+            RedHat: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
+          groups:
+            - wheel
+          authorized_keys:
+            - key: 'ssh-dss FAKEKEYSUTFF== tmonkey2'
+              state: present
+        - name: tmonkey3
+          comment: 'Test Monkey 3'
+          uid: 1008
+          password: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
+          group: monkeys
+          groups:
+            - wheel
+          authorized_keys:
+            - key: 'ssh-dss FAKEKEYSUTFF== tmonkey3'
+              state: present
+
+verifier:
+  name: testinfra
+
+molecule:
+  ignore_paths:
+    - .git
+    - .vagrant
+    - .bundle
+    - .vendor
+    - .venv
+    - .molecule
+    - vendor
+
+docker:
+  containers:
+    - name: centos6
+      image: centos
+      image_version: 6
+    - name: centos7
+      image: centos
+      image_version: 7

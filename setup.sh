@@ -100,7 +100,7 @@ done
 echo -e "\n"
 
 # Use existing Python VirtualENV if avilable
-virtualenv_path='.venv'
+virtualenv_path='venv'
 if [ ! -d "${virtualenv_path}" ]; then
     echo "Failed to find a virtualenv, creating one."
     virtualenv --no-site-packages ${virtualenv_path}
@@ -109,7 +109,7 @@ else
 fi
 
 # shellcheck disable=SC1091
-# shellcheck source=./venv/bin/activate
+# shellcheck source=/venv/bin/activate
 source "${virtualenv_path}/bin/activate"
 run pip install -U pip
 run pip install -r requirements.txt --upgrade

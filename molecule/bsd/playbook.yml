@@ -1,8 +1,31 @@
 ---
+- name: Install Prerequisites
+  hosts: all
+  gather_facts: False
+  become: True
+
+  tasks:
+    - name: FreeBSD | Is pkgng bootstrapped?
+      raw: /usr/sbin/pkg -N
+      register: pkg
+      ignore_errors: True
+      changed_when: False
+
+    - name: FreeBSD | Bootstrap pkgng
+      raw: /usr/bin/env ASSUME_ALWAYS_YES=1 /usr/sbin/pkg bootstrap -f
+      when: pkg|failed
+
+    - name: FreeBSD | Is python27 installed?
+      raw: /bin/test -f /usr/local/bin/python2.7
+      register: python27
+      ignore_errors: True
+      changed_when: False
+
 - name: Accounts Testing Playbook
   hosts: all
 
   vars:
+    ansible_python_interpreter: /usr/local/bin/python2.7
     accounts_groups:
       - name: monkeys
         gid: 2000
@@ -44,3 +67,4 @@
 
   roles:
     - {role: ansible-role-accounts}
+

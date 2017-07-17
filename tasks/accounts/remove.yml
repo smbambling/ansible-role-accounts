@@ -1,5 +1,6 @@
 ---
   - name: "Remove user {{ item.name }}"
+    become: True
     user:
       name: "{{ item.name }}"
       uid: "{{ item.uid }}"
@@ -7,6 +8,7 @@
       remove: "{{ item.remove | default('False') }}"
 
   - name: "Remove group {{ item.name }}"
+    become: True
     group:
       name: "{{ item.name }}"
       gid: "{{ item.uid }}"

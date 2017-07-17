@@ -1,0 +1,37 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  ssh_connection_options:
+    - '-o ControlPath=~/.ansible/cp/%r@%h-%p'
+lint:
+  name: yamllint
+  enabled: False
+platforms:
+  - name: freebsd11
+    box: freebsd/FreeBSD-11.0-RELEASE-p1
+    cpus: 2
+    memory: 1024
+    interfaces:
+      - network_name: private_network
+        type: dhcp
+        auto_config: true
+    instance_raw_config_args:
+      - "vm.base_mac = '080027D14C67'"
+      - "ssh.shell = 'sh'"
+      - "vm.synced_folder '.', '/vagrant', disabled: true"
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      all:
+        ansible_python_interpreter: /usr/local/bin/python2.7
+  lint:
+    name: ansible-lint
+scenario:
+  name: bsd
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

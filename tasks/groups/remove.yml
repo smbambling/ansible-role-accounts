@@ -1,5 +1,6 @@
 ---
   - name: "Remove group {{ item.name }}"
+    become: True
     group:
       name: "{{ item.name }}"
       gid: "{{ item.gid }}"

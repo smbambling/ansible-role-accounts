@@ -26,9 +26,7 @@ install:
   - ansible --version
   - pip install molecule==$MOLECULE_VERSION
   - pip install docker==$DOCKER_VERSION
-  - if [ "$ANSIBLE_VERSION" -lt '2.3.0' ]; then
-      pip install docker-py==$DOCKER_PY_VERSION
-    fi
+  - pip install docker-py==$DOCKER_PY_VERSION
   - pip install testinfra==$TESTINFRA_VERSION
 script:
   - molecule test --scenario-name default

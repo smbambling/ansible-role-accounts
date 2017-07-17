@@ -5,7 +5,7 @@ python:
   - '2.7'
 env:
   global:
-    - MOLECULE_VERSION='1.25.0'
+    - MOLECULE_VERSION='2.0.0.0rc11'
     - DOCKER_VERSION='2.2.1'
     - TESTINFRA_VERSION='1.6.4'
   matrix:

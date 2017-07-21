@@ -1,7 +1,9 @@
 ---
-- hosts: localhost
+- name: Setup
+  hosts: localhost
   connection: local
   gather_facts: False
+  no_log: "{{ not lookup('env', 'MOLECULE_DEBUG') | bool }}"
   vars:
     molecule_file: "{{ lookup('env', 'MOLECULE_FILE') }}"
     molecule_ephemeral_directory: "{{ lookup('env', 'MOLECULE_EPHEMERAL_DIRECTORY') }}"
@@ -19,13 +21,15 @@
       docker_image:
         path: "{{ molecule_ephemeral_directory }}"
         name: "molecule_local/{{ item.item.image }}"
-        dockerfile: "{{ item.item.dockerfile | default(item.invocation.module_args.dest) }}"
+        dockerfile: "{{ item.item.dockerfile | default(item.invocation.module_args.dest) }}"
+        force: "{{ item.item.force | default(True) }}"
       with_items: "{{ platforms.results }}"
+      when: platforms.changed
 
     - name: Create molecule instance(s)
       docker_container:
-        name: "{{ molecule_file | molecule_instance_with_scenario_name(item.name) }}"
-        hostname: "{{ molecule_file | molecule_instance_with_scenario_name(item.name) }}"
+        name: "{{ item.name }}"
+        hostname: "{{ item.name }}"
         image: "molecule_local/{{ item.image }}"
         state: started
         recreate: False

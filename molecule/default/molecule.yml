@@ -5,7 +5,7 @@ driver:
   name: docker
 lint:
   name: yamllint
-  enabled: False
+  enabled: True
 platforms:
   - name: centos6
     image: centos

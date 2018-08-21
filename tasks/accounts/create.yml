@@ -49,3 +49,4 @@
       - "{{ item.authorized_keys }}"
     loop_control:
       loop_var: auth_key
+    when: item.authorized_keys is defined

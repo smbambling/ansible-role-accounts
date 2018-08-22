@@ -1,52 +1,52 @@
 ---
-  - name: "Create group {{ item.name }}"
-    become: True
-    group:
-      name: "{{ item.name }}"
-      gid: "{{ item.uid }}"
-      state: "{{ item.state | default('present') }}"
-      system: "{{ item.is_system | default(False) }}"
-    when: (item.group is not defined) or
-      (item.group == item.name)
+- name: "Create group {{ item.name }}"
+  become: true
+  group:
+    name: "{{ item.name }}"
+    gid: "{{ item.uid }}"
+    state: "{{ item.state | default('present') }}"
+    system: "{{ item.is_system | default(False) }}"
+  when: (item.group is not defined) or
+    (item.group == item.name)
 
-  - name: "Create user {{ item.name }}"
-    become: True
-    user:
-      append: "{{ item.append | default(False) }}"
-      comment: "{{ item.comment }}"
-      createhome: "{{ item.createhome | default(True) }}"
-      expires: "{{ item.expires | default(omit) }}"
-      force: "{{ item.force | default(False) }}"
-      generate_ssh_key: "{{ item.generate_ssh_key | default(False) }}"
-      group: "{{ item.group | default(item.name) }}"
-      groups: "{{ (item.groups | default([])) | join(',') }}"
-      home: "{{ item.home | default(omit) }}"
-      login_class: "{{ item.login_class | default(omit) }}"
-      move_home: "{{ item.move_home | default(False) }}"
-      name: "{{ item.name }}"
-      non_unique: "{{ item.non_unique | default(False) }}"
-      password: "{{ item.password[ansible_os_family] | default(item.password) }}"
-      remove: "{{ item.remove | default(False) }}"
-      seuser: "{{ item.seuser | default(omit) }}"
-      shell: "{{ item.shell | default(omit) }}"
-      skeleton: "{{ item.skeleton | default(omit) }}"
-      ssh_key_bits: "{{ item.ssh_key_bits | default(omit) }}"
-      ssh_key_comment: "{{ item.ssh_key_comment | default(omit) }}"
-      ssh_key_file: "{{ item.ssh_key_file | default(omit) }}"
-      ssh_key_type: "{{ item.ssh_key_type | default(omit) }}"
-      state: "{{ item.state | default('present') }}"
-      system: "{{ item.is_system | default(False) }}"
-      uid: "{{ item.uid }}"
-      update_password: "{{ item.update_password | default('always') }}"
+- name: "Create user {{ item.name }}"
+  become: true
+  user:
+    append: "{{ item.append | default(False) }}"
+    comment: "{{ item.comment }}"
+    createhome: "{{ item.createhome | default(true) }}"
+    expires: "{{ item.expires | default(omit) }}"
+    force: "{{ item.force | default(False) }}"
+    generate_ssh_key: "{{ item.generate_ssh_key | default(False) }}"
+    group: "{{ item.group | default(item.name) }}"
+    groups: "{{ (item.groups | default([])) | join(',') }}"
+    home: "{{ item.home | default(omit) }}"
+    login_class: "{{ item.login_class | default(omit) }}"
+    move_home: "{{ item.move_home | default(False) }}"
+    name: "{{ item.name }}"
+    non_unique: "{{ item.non_unique | default(False) }}"
+    password: "{{ item.password[ansible_os_family] | default(item.password) }}"
+    remove: "{{ item.remove | default(False) }}"
+    seuser: "{{ item.seuser | default(omit) }}"
+    shell: "{{ item.shell | default(omit) }}"
+    skeleton: "{{ item.skeleton | default(omit) }}"
+    ssh_key_bits: "{{ item.ssh_key_bits | default(omit) }}"
+    ssh_key_comment: "{{ item.ssh_key_comment | default(omit) }}"
+    ssh_key_file: "{{ item.ssh_key_file | default(omit) }}"
+    ssh_key_type: "{{ item.ssh_key_type | default(omit) }}"
+    state: "{{ item.state | default('present') }}"
+    system: "{{ item.is_system | default(False) }}"
+    uid: "{{ item.uid }}"
+    update_password: "{{ item.update_password | default('always') }}"
 
-  - name: "Manage SSH authorized keys for {{ item.name }}"
-    become: True
-    authorized_key:
-      key: "{{ auth_key.key }}"
-      state: "{{ auth_key.state | default(omit) }}"
-      user: "{{ item.name }}"
-    with_items:
-      - "{{ item.authorized_keys }}"
-    loop_control:
-      loop_var: auth_key
-    when: item.authorized_keys is defined
+- name: "Manage SSH authorized keys for {{ item.name }}"
+  become: true
+  authorized_key:
+    key: "{{ auth_key.key }}"
+    state: "{{ auth_key.state | default(omit) }}"
+    user: "{{ item.name }}"
+  with_items:
+    - "{{ item.authorized_keys }}"
+  loop_control:
+    loop_var: auth_key
+  when: item.authorized_keys is defined

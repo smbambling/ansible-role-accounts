@@ -1,10 +1,10 @@
 ---
-  - name: Include Groups Tasks
-    include: groups/groups.yml
-    with_items: "{{ accounts_groups }}"
-    when: (accounts_groups | length > 0)
+- name: Include Groups Tasks
+  include: groups/groups.yml
+  with_items: "{{ accounts_groups }}"
+  when: (accounts_groups | length > 0)
 
-  - name: Include Accounts Tasks
-    include: accounts/accounts.yml
-    with_items: "{{ accounts_users }}"
-    when: (accounts_users | length > 0)
+- name: Include Accounts Tasks
+  include: accounts/accounts.yml
+  with_items: "{{ accounts_users }}"
+  when: (accounts_users | length > 0)

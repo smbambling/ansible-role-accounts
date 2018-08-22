@@ -1,8 +1,8 @@
 ---
-  - name: Include Create Groups Tasks
-    include: create.yml
-    when: item.state | default('present') == 'present'
+- name: Include Create Groups Tasks
+  include: create.yml
+  when: item.state | default('present') == 'present'
 
-  - name: Include Remove Groups Tasks
-    include: remove.yml
-    when: item.state | default('present') == 'absent'
+- name: Include Remove Groups Tasks
+  include: remove.yml
+  when: item.state | default('present') == 'absent'

@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-#######################
-#  Dependency Checks  #
-#######################
-
 total_nameservers=$(grep -c 'nameserver' /etc/resolv.conf || :)
 total_local_nameservers=$(grep -c 'nameserver 127' /etc/resolv.conf || :)
 if [[ $total_local_nameservers -gt 0 && $total_nameservers -eq 1 ]]; then
@@ -67,11 +63,6 @@ if [[ -z $ANSIBLE_SETUP_SKIP_DOCKER ]]; then
    fi
 fi
 
-
-#######################
-#  Library Functions  #
-#######################
-
 run() {
     if ! "$@"; then
       echo $?
@@ -100,7 +91,7 @@ done
 echo -e "\n"
 
 # Use existing Python VirtualENV if avilable
-virtualenv_path='venv'
+virtualenv_path='.venv'
 if [ ! -d "${virtualenv_path}" ]; then
     echo "Failed to find a virtualenv, creating one."
     virtualenv --no-site-packages ${virtualenv_path}
@@ -109,8 +100,10 @@ else
 fi
 
 # shellcheck disable=SC1091
-# shellcheck source=/venv/bin/activate
-source "${virtualenv_path}/bin/activate"
+# shellcheck source=./venv/bin/activate
+source ./.venv/bin/activate
+# Upgrade pip iva pypa, need Pip 9.0.3 or greater that supports TLSv1.2
+run curl https://bootstrap.pypa.io/get-pip.py | python
 run pip install -U pip
 run pip install -r requirements.txt --upgrade
 

@@ -1,8 +1,16 @@
+import pytest
+import os
 import testinfra.utils.ansible_runner
+
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
-    '.molecule/ansible_inventory').get_hosts('all')
+    os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-def test_tmonkey1_user(host):
-    myuser = host.group('monkeys')
-    assert myuser.gid == 2000
+@pytest.mark.parametrize('group', [
+    ['monkeys', 2000],
+    ['beatles', None],
+])
+def test_ops_group(host, group):
+    assert host.group(group[0]).exists
+    if group[1]:
+        assert host.group(group[0]).gid == group[1]

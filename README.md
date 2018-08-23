@@ -50,11 +50,34 @@ unless stated below
 
 | Name              | Default | Type        | Notes         |
 | ------------------|---------| ------------| --------------------|
-| create_home       | True        | Boolean     | A home directory is set to be created by default |
-| group             | `item.name` | String  | The primary user group is set to be the same value as the user namee.  If a gropu that doesn't match the user name is desired it must be created within the `accounts_groups` array or be already available on the system.          |
+| group             | `item.name` | String  | The primary user group is set to be the same value as the user name. If a group that doesn't match the user name is desired it must be created within the `accounts_groups` array or be already available on the system.          |
 | groups            | -           | Array   | A list of additional groups the user is a memeber of |
-| password          | `item.password` | String/Hash | If a single crypted value is supplied it sets the users password to that value. There are different crypted methods for various operating systems, thus a hash can be created based on the `ansible_os_family`.  See the below example Playbooks
-| uid               | -           | Int     | A UID value must be supplied to create a group with the same GID as the user UID |
+| password          | `item.password` | String/Hash | If a single crypted value is supplied it sets the users password to that value. There are different crypted methods for various operating systems, a hash can be created based on the `ansible_os_family`.  See the below example Playbooks
+
+#### Example
+```yml
+## Create Groups ##
+
+accounts_groups:
+  - name: monkeys
+    gid: 2000
+
+## Create Account/Users ##
+
+accounts_users:
+  - name: tmonkey1
+    comment: 'Test Monkey 1'
+    uid: 1006
+    password:
+      OpenBSD: "$2b$08$3eBhGgrLIXZP8Ewh8tqXtuh38M463K2rKYJSyUgATRKQNX70b2jyG"
+      FreeBSD: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
+      RedHat: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
+    groups:
+      - wheel
+    authorized_keys:
+      - key: 'ssh-dss FAKEKEYSUTFF== tmonkey1'
+        state: present
+```
 
 ## Dependencies
 
@@ -67,73 +90,18 @@ declared at any precedence level.
 For the most flexibility my recomendation is to declare them at the
 inventory group\_vars level
 
-### Using in-line Playbook Variables
-
-```yaml
----
-- name: Accounts Testing Playbook
-  hosts: all
-
-  vars:
-    accounts_groups:
-      - name: monkeys
-        gid: 2000
-    accounts_users:
-      - name: tmonkey1
-        comment: 'Test Monkey 1'
-        uid: 1006
-        password:
-          OpenBSD: "$2b$08$3eBhGgrLIXZP8Ewh8tqXtuh38M463K2rKYJSyUgATRKQNX70b2jyG"
-          FreeBSD: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
-          RedHat: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
-        groups:
-          - wheel
-        authorized_keys:
-          - key: 'ssh-dss FAKEKEYSUTFF== tmonkey1'
-            state: present
-      - name: tmonkey2
-        comment: 'Test Monkey 2'
-        uid: 1007
-        password:
-          OpenBSD: "$2b$08$3eBhGgrLIXZP8Ewh8tqXtuh38M463K2rKYJSyUgATRKQNX70b2jyG"
-          FreeBSD: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
-          RedHat: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
-        groups:
-          - wheel
-        authorized_keys:
-          - key: 'ssh-dss FAKEKEYSUTFF== tmonkey2'
-            state: present
-      - name: tmonkey3
-        comment: 'Test Monkey 3'
-        uid: 1008
-        password: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
-        group: monkeys
-        groups:
-          - wheel
-        authorized_keys:
-          - key: 'ssh-dss FAKEKEYSUTFF== tmonkey3'
-            state: present
-
-  roles:
-    - {role: ansible-role-accounts}
-```
+See the Molecule testing [Playbook](molecule/default/playbook.yml) for an example
 
 ## Development / Contributing
 
 See [Contributing](.github/CONTRIBUTING.md).
 
-Note: This role is currently only tested against the following OS and Ansible versions:
+This role has been tested against the following distributions and Ansible version:
 
-### Operating Systems / version
-
-- CentOS 6.x
-- CentOS 7.x
-
-### Ansible Versions
-
-- 2.1.0
-- 2.2.2
-- latest
+|Distribution|Ansible 2.2|Ansible 2.3|Ansible 2.4|Ansible 2.5|
+|------------|-----------|-----------|-----------|-----------|
+|**Centos 6**|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|
+|**Centos 7**|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|
 
 ## License
 

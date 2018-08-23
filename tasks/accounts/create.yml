@@ -3,7 +3,7 @@
   become: true
   group:
     name: "{{ item.name }}"
-    gid: "{{ item.uid }}"
+    gid: "{{ item.uid | default(omit) }}"
     state: "{{ item.state | default('present') }}"
     system: "{{ item.is_system | default(False) }}"
   when: (item.group is not defined) or
@@ -13,7 +13,7 @@
   become: true
   user:
     append: "{{ item.append | default(False) }}"
-    comment: "{{ item.comment }}"
+    comment: "{{ item.comment | default(omit) }}"
     createhome: "{{ item.createhome | default(true) }}"
     expires: "{{ item.expires | default(omit) }}"
     force: "{{ item.force | default(False) }}"
@@ -36,7 +36,7 @@
     ssh_key_type: "{{ item.ssh_key_type | default(omit) }}"
     state: "{{ item.state | default('present') }}"
     system: "{{ item.is_system | default(False) }}"
-    uid: "{{ item.uid }}"
+    uid: "{{ item.uid | default(omit) }}"
     update_password: "{{ item.update_password | default('always') }}"
 
 - name: "Manage SSH authorized keys for {{ item.name }}"

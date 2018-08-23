@@ -6,6 +6,7 @@
     accounts_groups:
       - name: monkeys
         gid: 2000
+      - name: beatles
     accounts_users:
       - name: tmonkey1
         comment: 'Test Monkey 1'
@@ -26,6 +27,7 @@
           OpenBSD: "$2b$08$3eBhGgrLIXZP8Ewh8tqXtuh38M463K2rKYJSyUgATRKQNX70b2jyG"
           FreeBSD: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
           RedHat: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
+        home: /opt/home_tmonkey2
         groups:
           - wheel
         authorized_keys:
@@ -41,6 +43,8 @@
         authorized_keys:
           - key: 'ssh-dss FAKEKEYSUTFF== tmonkey3'
             state: present
+      - name: tmonkey4
+        password: '!!'
 
   roles:
     - {role: ansible-role-accounts}

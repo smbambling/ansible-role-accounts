@@ -101,7 +101,7 @@ See [Contributing](.github/CONTRIBUTING.md).
 
 This role has been tested against the following distributions and Ansible version:
 
-|Distribution|Ansible 2.2|Ansible 2.3|Ansible 2.4|Ansible 2.5|
+|Distribution|Ansible 2.3|Ansible 2.4|Ansible 2.5|Ansible 2.6|
 |------------|-----------|-----------|-----------|-----------|
 |**Centos 6**|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|
 |**Centos 7**|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|

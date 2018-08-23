@@ -11,7 +11,7 @@
 1. [Requirements](#requirements)
 1. [Role Variables](#role-variables)
 1. [Dependencies](#dependencies)
-1. [Examples](#example-playbooks)
+1. [Examples](#examples)
 1. [Development / Contributing](#development--contributing)
 1. [License](#license)
 1. [Author Information](#author-information)
@@ -54,7 +54,19 @@ unless stated below
 | groups            | -           | Array   | A list of additional groups the user is a memeber of |
 | password          | `item.password` | String/Hash | If a single crypted value is supplied it sets the users password to that value. There are different crypted methods for various operating systems, a hash can be created based on the `ansible_os_family`.  See the below example Playbooks
 
-#### Example
+## Dependencies
+
+None
+
+## Examples Playbook(s)
+
+### Example Variable Definition
+
+The `accounts_groups` and `accounts_users` list varaiables can be
+declared at any precedence level.
+For the most flexibility my recomendation is to declare them at the
+inventory group\_vars level
+
 ```yml
 ## Create Groups ##
 
@@ -79,16 +91,7 @@ accounts_users:
         state: present
 ```
 
-## Dependencies
-
-None
-
-## Example Playbook(s)
-
-The `accounts_groups` and `accounts_users` list varaiables can be
-declared at any precedence level.
-For the most flexibility my recomendation is to declare them at the
-inventory group\_vars level
+### Example Playbook
 
 See the Molecule testing [Playbook](molecule/default/playbook.yml) for an example
 

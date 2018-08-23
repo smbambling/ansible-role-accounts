@@ -14,6 +14,11 @@ galaxy_info:
       - 23
       - 24
       - 25
+   - name: Ubuntu
+      - bionic
+      - 18.04
+      - cosmic
+      - 18.10
   galaxy_tags:
     - accounts
     - users

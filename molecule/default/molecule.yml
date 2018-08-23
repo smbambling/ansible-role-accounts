@@ -11,6 +11,10 @@ lint:
   enabled: False
 
 platforms:
+  - name: ubuntu1804
+    image: ubuntu:18.04
+  - name: ubuntu1810
+    image: ubuntu:18.10
   - name: centos6
     image: centos:centos6
   - name: centos7

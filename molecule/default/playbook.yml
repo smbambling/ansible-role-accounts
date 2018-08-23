@@ -15,8 +15,9 @@
           OpenBSD: "$2b$08$3eBhGgrLIXZP8Ewh8tqXtuh38M463K2rKYJSyUgATRKQNX70b2jyG"
           FreeBSD: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
           RedHat: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
+          Debian: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
         groups:
-          - wheel
+          - root
         authorized_keys:
           - key: 'ssh-dss FAKEKEYSUTFF== tmonkey1'
             state: present
@@ -27,9 +28,10 @@
           OpenBSD: "$2b$08$3eBhGgrLIXZP8Ewh8tqXtuh38M463K2rKYJSyUgATRKQNX70b2jyG"
           FreeBSD: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
           RedHat: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
+          Debian: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
         home: /opt/home_tmonkey2
         groups:
-          - wheel
+          - root
         authorized_keys:
           - key: 'ssh-dss FAKEKEYSUTFF== tmonkey2'
             state: present
@@ -39,7 +41,7 @@
         password: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
         group: monkeys
         groups:
-          - wheel
+          - root
         authorized_keys:
           - key: 'ssh-dss FAKEKEYSUTFF== tmonkey3'
             state: present

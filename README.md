@@ -58,7 +58,11 @@ unless stated below
 
 None
 
-## Examples Playbook(s)
+## Examples
+
+### Example Playbook
+
+See the Molecule testing [Playbook](molecule/default/playbook.yml) for an example
 
 ### Example Variable Definition
 
@@ -90,10 +94,6 @@ accounts_users:
       - key: 'ssh-dss FAKEKEYSUTFF== tmonkey1'
         state: present
 ```
-
-### Example Playbook
-
-See the Molecule testing [Playbook](molecule/default/playbook.yml) for an example
 
 ## Development / Contributing
 

@@ -7,6 +7,7 @@
       - name: monkeys
         gid: 2000
       - name: beatles
+      - name: wheel
     accounts_users:
       - name: tmonkey1
         comment: 'Test Monkey 1'
@@ -17,7 +18,7 @@
           RedHat: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
           Debian: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
         groups:
-          - root
+          - wheel
         authorized_keys:
           - key: 'ssh-dss FAKEKEYSUTFF== tmonkey1'
             state: present
@@ -31,7 +32,7 @@
           Debian: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
         home: /opt/home_tmonkey2
         groups:
-          - root
+          - wheel
         authorized_keys:
           - key: 'ssh-dss FAKEKEYSUTFF== tmonkey2'
             state: present
@@ -41,7 +42,7 @@
         password: "$1$N0JqVxf/$iSmuQ6lyKB/GJUe52DqFw/"
         group: monkeys
         groups:
-          - root
+          - wheel
         authorized_keys:
           - key: 'ssh-dss FAKEKEYSUTFF== tmonkey3'
             state: present

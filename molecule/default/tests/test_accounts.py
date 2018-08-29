@@ -9,11 +9,11 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 @pytest.mark.parametrize(
     'name,uid,comment,primary_group,secondary_group,auth_key', [
         ('tmonkey1', '1006', 'Test Monkey 1',
-         'tmonkey1', 'root', 'FAKEKEYSUTFF== tmonkey1'),
+         'tmonkey1', 'wheel', 'FAKEKEYSUTFF== tmonkey1'),
         ('tmonkey2', '1007', 'Test Monkey 2',
-         'tmonkey2', 'root', 'FAKEKEYSUTFF== tmonkey2'),
+         'tmonkey2', 'wheel', 'FAKEKEYSUTFF== tmonkey2'),
         ('tmonkey3', '1008', 'Test Monkey 3',
-         'monkeys', 'root', 'FAKEKEYSUTFF== tmonkey3'),
+         'monkeys', 'wheel', 'FAKEKEYSUTFF== tmonkey3'),
         ('tmonkey4', None, None, 'tmonkey4', None, None)
     ])
 def test_sweng_user(host, name, uid, comment,

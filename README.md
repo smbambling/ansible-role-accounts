@@ -22,7 +22,7 @@ Generic user account and group management
 
 ## Requirements
 
-This role requires Ansible 2.1 or higher and platform requirements are
+This role requires Ansible 2.3 or higher and platform requirements are
 listed in the [metadata](meta/main.yml) file.
 
 ## Role Variables
@@ -105,6 +105,10 @@ This role has been tested against the following distributions and Ansible versio
 |------------|-----------|-----------|-----------|-----------|
 |**Centos 6**|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|
 |**Centos 7**|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|
+|**Ubuntu 18.04**|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|
+|**Ubuntu 18.10**|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|
+|**FreeBSD 11.2**|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|
+|**OpenBSD 6.3**|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|<span style="color:green">Yes</span>|
 
 ## License
 

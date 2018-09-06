@@ -51,4 +51,3 @@
 
   roles:
     - {role: ansible-role-accounts}
-

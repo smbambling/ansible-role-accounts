@@ -43,4 +43,3 @@ verifier:
   lint:
     name: flake8
     enabled: True
-
